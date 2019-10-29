@@ -15,9 +15,9 @@ public interface UserRepository
 extends JpaRepository<AuthenticatedUser, Long>, PagingAndSortingRepository<AuthenticatedUser, Long> 
 {
 
-	@Query("SELECT au FROM AuthenticatedUser ua WHERE au.userName = :username")
+	@Query("SELECT au FROM AuthenticatedUser au WHERE au.userName = :username")
 	public AuthenticatedUser getUserByUsername(@Param("username") String username);
 	
-	@Query("SELECT au FROM AuthenticatedUser ua WHERE au.status = true")
+	@Query("SELECT au FROM AuthenticatedUser au WHERE au.status = true")
 	public Page<AuthenticatedUser> findAllActiveUsers(Pageable pageable);
 }

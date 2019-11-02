@@ -1,6 +1,6 @@
-MYSQL ROOT USER
-user = root
-password = Th3Myth02
+#MYSQL ROOT USER
+#user = root
+#password = Th3Myth02
 
 CREATE DATABASE project_scheduler;
 

@@ -12,9 +12,8 @@ import javax.persistence.Table;
 public class ProjectDetails {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="project_id", nullable = false, updatable = false)
-	private Long userId;
+	private Long projectId;
 	
 	@Column(name="short_desc", length = 256, nullable = true, columnDefinition = "varchar(256)")
 	private String shortdescription;

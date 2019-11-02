@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,7 +37,7 @@ public class Project
 	@Column(name="project_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
 	private String projectName;
 	
-	@OneToOne(mappedBy = "projectId", targetEntity = Project.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Project.class, fetch = FetchType.LAZY)
 	private Project parentProject;
 
 	@Convert(converter=StatusConverter.class)
@@ -56,11 +56,12 @@ public class Project
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date dateUpdated;
 	
-	@OneToOne(mappedBy = "projectId", targetEntity = ProjectDetails.class, fetch = FetchType.LAZY)
-	private ProjectDetails details;
+//	@OneToOne(mappedBy = "projectId", targetEntity = ProjectDetails.class, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "project_id")
+//	private ProjectDetails details;
 	
-	@ManyToMany(mappedBy = "projectId", targetEntity = AuthenticatedUser.class, fetch = FetchType.LAZY)
-	private Set<AuthenticatedUser> users;
+//	@ManyToMany(mappedBy = "userId", targetEntity = AuthenticatedUser.class, fetch = FetchType.LAZY)
+//	private Set<AuthenticatedUser> users;
 	
 	
 	
@@ -113,20 +114,20 @@ public class Project
 		this.dateUpdated = dateUpdated;
 	}
 
-	public ProjectDetails getDetails() {
-		return details;
-	}
+//	public ProjectDetails getDetails() {
+//		return details;
+//	}
 
-	public void setDetails(ProjectDetails details) {
-		this.details = details;
-	}
+//	public void setDetails(ProjectDetails details) {
+//		this.details = details;
+//	}
 
-	public Set<AuthenticatedUser> getUsers() {
-		return users;
-	}
+//	public Set<AuthenticatedUser> getUsers() {
+//		return users;
+//	}
 
-	public void setUsers(Set<AuthenticatedUser> users) {
-		this.users = users;
-	}
+//	public void setUsers(Set<AuthenticatedUser> users) {
+//		this.users = users;
+//	}
 
 }

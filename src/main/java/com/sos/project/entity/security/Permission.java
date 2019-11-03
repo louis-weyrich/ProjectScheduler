@@ -48,7 +48,5 @@ public class Permission
 	public void setPermissionName(String permissionName) {
 		this.permissionName = permissionName;
 	}
-	
-	
 
 }

@@ -33,7 +33,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return bCryptPasswordEncoder;
     }
 
-    @Bean(name = "datasource")
+    @SuppressWarnings("unchecked")
+	@Bean(name = "datasource")
     @Primary
     public DataSource createDataSource() {
     	DataSourceBuilder <HikariDataSource> dataSourceBuilder = (DataSourceBuilder <HikariDataSource>)DataSourceBuilder.create();

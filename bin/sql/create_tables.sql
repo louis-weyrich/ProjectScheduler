@@ -20,8 +20,9 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
 CREATE TABLE `project_scheduler`.`role` (
 	`role_id` INT NOT NULL AUTO_INCREMENT,
     `role_name` VARCHAR(32) NOT NULL,
+    `role_type` varchar(32) NOT NULL DEFAULT 'project', # values ('admin','project')
     PRIMARY KEY (`role_id`),
-    CONSTRAINT unique_role UNIQUE(`role`)
+    CONSTRAINT unique_role UNIQUE(`role_name`)
 );
 
 
@@ -40,7 +41,7 @@ CREATE TABLE `project_scheduler`.`permission` (
 	`permission_id` INT NOT NULL AUTO_INCREMENT,
     `permission_name` VARCHAR(48) NOT NULL,
     PRIMARY KEY (`permission_id`),
-    CONSTRAINT unique_permission UNIQUE(`permission`),
+    CONSTRAINT unique_permission UNIQUE(`permission_name`)
 );
  
  
@@ -81,7 +82,6 @@ CREATE TABLE `project_scheduler`.`projects` (
 	`date_closed` DATETIME,
 	`status` VARCHAR(12) NOT NULL DEFAULT 'OPEN',
 	PRIMARY KEY (`project_id`),
-	FOREIGN KEY(`user_id`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
 	INDEX ndx_projects (`project_name`),
 	CONSTRAINT unique_project UNIQUE(`project_name`)
 );
@@ -99,9 +99,11 @@ CREATE TABLE `project_scheduler`.`project_details` (
 CREATE TABLE `project_scheduler`.`project_user` (
 	`project_id`  INT NOT NULL,
 	`user_id`  INT NOT NULL,
-	PRIMARY KEY (`project_id`, `user_id`),
+    `role_id` INT NOT NULL,
+	PRIMARY KEY (`project_id`, `user_id`,`role_id`),
 	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-	FOREIGN KEY(`user_id`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+	FOREIGN KEY(`user_id`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY(`role_id`) references `project_scheduler`.`role`(`role_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 DELIMITER $$

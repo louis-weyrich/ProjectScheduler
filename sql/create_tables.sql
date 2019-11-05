@@ -88,7 +88,7 @@ CREATE TABLE `project_scheduler`.`projects` (
 
 
 CREATE TABLE `project_scheduler`.`project_details` (
-	`project_id` INT NOT NULL,
+    `project_id` INT NOT NULL,
 	`short_desc` VARCHAR(256),
 	`long_desc` TEXT,
 	PRIMARY KEY (`project_id`),

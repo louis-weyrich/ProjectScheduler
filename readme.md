@@ -5,8 +5,8 @@
 	username: 	louis-weyrich
 	email: 		louisweyrich.aws@gmail.com
 	password:  	TheMyth02
-	
----	
+
+---
 
 ##Getting Started Steps
 	- Install Java 8 JDK
@@ -27,3 +27,6 @@
 ##Install GIT
 	- [GIT SCM](https://git-scm.com/downloads)
 	- [GITHub Client](https://desktop.github.com/)
+
+##Install Postman
+	- [Postman Client](https://www.getpostman.com/downloads)

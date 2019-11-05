@@ -45,11 +45,11 @@ public class PasswordController
 	@GetMapping(value = "/can-login/{username}/{password}", produces = "application/json")
 	public Boolean canLogin(@PathVariable("username") String username,  @PathVariable("password") String password)
 	{
-//		AuthenticatedUser user = userService.getRawUserByUsername(username);
-//		if(user != null)
-//		{
-//			return bCryptPasswordEncoder.matches(password, user.getPasswordHash());
-//		}
+		AuthenticatedUser user = userService.getRawUserByUsername(username);
+		if(user != null)
+		{
+			return bCryptPasswordEncoder.matches(password, user.getPasswordHash());
+		}
 		
 		return false;
 	}

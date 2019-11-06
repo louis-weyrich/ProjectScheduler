@@ -30,3 +30,6 @@
 
 ##Install Postman
 	- [Postman Client](https://www.getpostman.com/downloads)
+	
+##Install Redis
+	- [Redis](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298)

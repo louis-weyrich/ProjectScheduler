@@ -42,15 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 			.antMatchers("/rest/**").permitAll()
 			.antMatchers("/error").permitAll()
 			.antMatchers("/login").permitAll()
-			.antMatchers("/search").permitAll()
-			.antMatchers("/search/**").permitAll()
 			.antMatchers("/public/**").permitAll()
 			.antMatchers("/webjars/**").permitAll()
-			.antMatchers("/viewuser").access("hasAuthority('USER')")
-			.antMatchers("/edituser").access("hasAuthority('ADMIN')")
-			.antMatchers("/create-user").access("hasAuthority('ADMIN')")
-			.antMatchers("/create-ticket").access("hasAuthority('ADMIN')")
-			.antMatchers("/edit-ticket").access("hasAuthority('ADMIN')")
 			.anyRequest()
 			.authenticated()
 			.and()
@@ -77,7 +70,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
         auth
         	.jdbcAuthentication()
             .usersByUsernameQuery(usersQuery)
-            //.groupAuthoritiesByUsername(rolesQuery)
             .authoritiesByUsernameQuery(rolesQuery)
             .dataSource(dataSource)
             .passwordEncoder(bCryptPasswordEncoder);

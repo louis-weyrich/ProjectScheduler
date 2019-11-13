@@ -15,7 +15,7 @@ public class Permission
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="permission _id", nullable = false, updatable = false)
+	@Column(name="permission_id", nullable = false, updatable = false)
 	private Long permissionId;
 	
 	@Column(name="permission_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")

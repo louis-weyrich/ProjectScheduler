@@ -20,7 +20,7 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
 CREATE TABLE `project_scheduler`.`role` (
 	`role_id` INT NOT NULL AUTO_INCREMENT,
     `role_name` VARCHAR(32) NOT NULL,
-    `role_type` VARCHAR(32) NOT NULL DEFAULT 'project', # values ('admin','project')
+    `role_type` VARCHAR(32) NOT NULL DEFAULT 'project', # values ('admin','project'),
     PRIMARY KEY (`role_id`),
     CONSTRAINT unique_role UNIQUE(`role_name`)
 );
@@ -35,11 +35,12 @@ CREATE TABLE `project_scheduler`.`user_role` (
     FOREIGN KEY(`role_id`) references `project_scheduler`.`role`(`role_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-
+drop table `project_scheduler`.`permission`;
 
 CREATE TABLE `project_scheduler`.`permission` (
 	`permission_id` INT NOT NULL AUTO_INCREMENT,
     `permission_name` VARCHAR(48) NOT NULL,
+    `permission_type` VARCHAR(32) NOT NULL DEFAULT 'project', # values ('ADMIN','PROJECT'),
     PRIMARY KEY (`permission_id`),
     CONSTRAINT unique_permission UNIQUE(`permission_name`)
 );

@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService
 		}
 		else
 		{
-			AuthenticatedUser aUser = userRepo.getUserByUsername(user.getUserName());
+			AuthenticatedUser aUser = userRepo.getUserByUsername(user.getUsername());
 			user.setPasswordHash(aUser.getPasswordHash());
 		}
 		

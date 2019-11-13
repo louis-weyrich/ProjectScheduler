@@ -23,15 +23,18 @@ public class Role
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="role _id", nullable = false, updatable = false)
+	@Column(name="role_id", nullable = false, updatable = false)
 	private Long roleId;
 	
 	@Column(name="role_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
 	private String roleName;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "role_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private Set<Permission> permissions;
+	
+	@ManyToMany(mappedBy = "roles")
+	private Set<AuthenticatedUser> users;
 
 	public Long getRoleId() {
 		return roleId;
@@ -55,6 +58,16 @@ public class Role
 
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
+	}
+
+	public Set<AuthenticatedUser> getUsers()
+	{
+		return users;
+	}
+
+	public void setUsers(Set<AuthenticatedUser> users)
+	{
+		this.users = users;
 	}
 	
 	

@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 			.antMatchers("/login").permitAll()
 			.antMatchers("/public/**").permitAll()
 			.antMatchers("/webjars/**").permitAll()
+			.antMatchers("/rest/public/**").permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()

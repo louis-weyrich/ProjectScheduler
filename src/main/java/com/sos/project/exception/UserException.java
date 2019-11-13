@@ -14,6 +14,10 @@ public class UserException extends RuntimeException {
 		this.user = user;
 	}
 
+	public UserException(String message) {
+		super(message);
+	}
+	
 	public UserException(UserDTO user, String message) {
 		super(message);
 		this.user = user;
@@ -38,8 +42,6 @@ public class UserException extends RuntimeException {
 		return user;
 	}
 
-	public void setUser(UserDTO user) {
-		this.user = user;
-	}
+	
 
 }

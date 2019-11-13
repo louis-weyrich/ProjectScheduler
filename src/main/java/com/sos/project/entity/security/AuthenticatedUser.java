@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class AuthenticatedUser
 	private Long userId;
 	
 	@Column(name="user_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
-	private String userName;
+	private String username;
 	
 	@Column(name="full_name", nullable = false, length = 26, columnDefinition = "varchar(26)")
 	private String fullName;
@@ -65,7 +66,7 @@ public class AuthenticatedUser
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date dateDeactivated;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
@@ -78,7 +79,7 @@ public class AuthenticatedUser
 	public AuthenticatedUser(UserDTO user)
 	{
 		this.userId = user.getUserId();
-    	this.userName = user.getUserName();
+    	this.username = user.getUsername();
     	this.fullName = user.getFullName();
     	this.passwordHash = user.getPasswordHash();
     	this.email = user.getEmail();
@@ -97,12 +98,12 @@ public class AuthenticatedUser
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getFullName() {
@@ -171,7 +172,7 @@ public class AuthenticatedUser
 	
 	public int hashCode()
 	{
-		return userName.hashCode();
+		return username.hashCode();
 	}
 	
 	public boolean equals(Object src)
@@ -186,6 +187,6 @@ public class AuthenticatedUser
 	
 	public String toString()
 	{
-		return userName;
+		return username;
 	}
 }

@@ -18,7 +18,7 @@ public class UserDTO {
 	private Long userId;
 	
 	@Size(min = 8, max = 48, message = "Username must be greater than 7 and less than 49")
-	private String userName;
+	private String username;
 	
 	@NotEmpty
 	private String fullName;
@@ -48,7 +48,7 @@ public class UserDTO {
     public UserDTO(AuthenticatedUser user) 
     {
     	this.userId = user.getUserId();
-    	this.userName = user.getUserName();
+    	this.username = user.getUsername();
     	this.fullName = user.getFullName();
     	this.passwordHash = user.getPasswordHash();
     	this.email = user.getEmail();
@@ -82,12 +82,12 @@ public class UserDTO {
 		this.userId = userId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getFullName() {

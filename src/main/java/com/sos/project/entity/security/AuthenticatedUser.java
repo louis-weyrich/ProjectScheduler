@@ -2,7 +2,7 @@ package com.sos.project.entity.security;
 
 import java.util.Date;
 import java.util.Set;
-
+ 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;

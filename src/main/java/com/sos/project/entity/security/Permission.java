@@ -1,5 +1,5 @@
 package com.sos.project.entity.security;
-
+ 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

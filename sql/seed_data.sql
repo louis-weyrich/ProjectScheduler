@@ -4,6 +4,7 @@ SET FOREIGN_KEY_CHECKS=0;
 
 
 
+
 INSERT INTO `project_scheduler`.`permission`
 	(`permission_name`, `permission_type`)
 VALUES

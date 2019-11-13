@@ -13,8 +13,9 @@ import com.sos.project.entity.security.AuthenticatedUser;
 import com.sos.project.entity.security.Permission;
 import com.sos.project.entity.security.Role;
 
-public class UserDTO {
-
+public class UserDTO 
+{
+ 
 	private Long userId;
 	
 	@Size(min = 8, max = 48, message = "Username must be greater than 7 and less than 49")

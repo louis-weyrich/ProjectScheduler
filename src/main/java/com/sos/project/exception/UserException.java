@@ -1,5 +1,5 @@
 package com.sos.project.exception;
-
+ 
 import com.sos.project.dto.UserDTO;
 
 public class UserException extends RuntimeException {

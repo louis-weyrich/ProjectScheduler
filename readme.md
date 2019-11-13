@@ -1,4 +1,4 @@
-#READ ME
+#READ ME 
 
 ##GitHub Info
 	path: 		<https://github.com/louis-weyrich/ProjectScheduler.git>
@@ -33,3 +33,8 @@
 	
 ## J Micheal Brows Project
 	- [Simple Kanban] (https://github.com/jmichaelbrown8/simple-kanban)
+	
+##Install Redis
+	- [Redis](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298)
+##Install Balsamiq
+	- [Balsalmiq](https://balsamiq.com/wireframes/desktop/)

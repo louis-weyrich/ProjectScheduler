@@ -20,7 +20,7 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
 CREATE TABLE `project_scheduler`.`role` (
 	`role_id` INT NOT NULL AUTO_INCREMENT,
     `role_name` VARCHAR(32) NOT NULL,
-    `role_type` varchar(32) NOT NULL DEFAULT 'project', # values ('admin','project')
+    `role_type` VARCHAR(16) NOT NULL DEFAULT 'project', # values ('admin','project')
     PRIMARY KEY (`role_id`),
     CONSTRAINT unique_role UNIQUE(`role_name`)
 );

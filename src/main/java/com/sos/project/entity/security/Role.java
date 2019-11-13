@@ -4,7 +4,10 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.sos.project.entity.enumeration.RoleType;
+import com.sos.project.entity.enumeration.RoleTypeConverter;
 
 
 
@@ -28,6 +34,11 @@ public class Role
 	
 	@Column(name="role_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
 	private String roleName;
+	
+	@Convert(converter=RoleTypeConverter.class)
+	@Enumerated(EnumType.STRING)
+	@Column(name="role_type", length= 16, nullable = false, columnDefinition = "varchar(16)")
+	private RoleType roleType;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "role_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
@@ -47,6 +58,14 @@ public class Role
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public RoleType getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(RoleType roleType) {
+		this.roleType = roleType;
 	}
 
 	public Set<Permission> getPermissions() {

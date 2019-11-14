@@ -51,7 +51,7 @@ public class UserDTO
     	this.userId = user.getUserId();
     	this.username = user.getUsername();
     	this.fullName = user.getFullName();
-    	this.passwordHash = user.getPasswordHash();
+//    	this.passwordHash = user.getPasswordHash();
     	this.email = user.getEmail();
     	this.phone = user.getPhone();
     	this.status = user.getStatus();
@@ -68,7 +68,7 @@ public class UserDTO
     			{
     				for(Permission permission : role.getPermissions())
     				{
-    					permissions.add(new PermissionDTO(permission.getPermissionId(), permission.getPermissionName()));
+    					permissions.add(new PermissionDTO(permission.getPermissionId(), permission.getPermissionName(), permission.getRoleType()));
     				}
     			}
     		}

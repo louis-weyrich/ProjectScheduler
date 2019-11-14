@@ -85,7 +85,6 @@ CREATE TABLE `project_scheduler`.`projects` (
 	CONSTRAINT unique_project UNIQUE(`project_name`)
 );
 
-drop table `project_scheduler`.`project_hierarchy`;
 
 CREATE TABLE `project_scheduler`.`sub_projects`(
 	`project_id` INT NOT NULL,

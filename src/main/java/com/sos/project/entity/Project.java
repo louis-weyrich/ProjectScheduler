@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,7 +25,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.sos.project.entity.enumeration.Status;
 import com.sos.project.entity.enumeration.StatusConverter;
-import com.sos.project.entity.security.AuthenticatedUser;
 
 
 @Table(name = "projects", schema = "project_scheduler")
@@ -39,10 +38,6 @@ public class Project
 	
 	@Column(name="project_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
 	private String projectName;
-	
-	@OneToOne(targetEntity = Project.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="parent_project_id", referencedColumnName = "project_id", nullable = true)
-	private Project parentProject;
 
 	@Convert(converter=StatusConverter.class)
 	@Enumerated(EnumType.STRING)
@@ -64,11 +59,9 @@ public class Project
 	@JoinColumn(name = "project_id", referencedColumnName = "project_id")
 	private ProjectDetails details;
 	
-	@ManyToMany(cascade = CascadeType.ALL, targetEntity = AuthenticatedUser.class)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<AuthenticatedUser> users;
-	
-	
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Project.class)
+	@JoinTable(name = "sub_projects",  joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "project_id"), inverseJoinColumns = @JoinColumn(name = "sub_project_id"))
+	private Set<Project> subProjects;
 	
 
 	public Long getProjectId() {
@@ -85,14 +78,6 @@ public class Project
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
-	}
-
-	public Project getParentProject() {
-		return parentProject;
-	}
-
-	public void setParentProject(Project parentProject) {
-		this.parentProject = parentProject;
 	}
 
 	public Status getStatus() {
@@ -127,12 +112,14 @@ public class Project
 		this.details = details;
 	}
 
-	public Set<AuthenticatedUser> getUsers() {
-		return users;
+	public Set<Project> getSubProjects()
+	{
+		return subProjects;
 	}
 
-	public void setUsers(Set<AuthenticatedUser> users) {
-		this.users = users;
+	public void setSubProjects(Set<Project> subProjects)
+	{
+		this.subProjects = subProjects;
 	}
-
+	
 }

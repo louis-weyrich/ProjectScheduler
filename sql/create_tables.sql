@@ -1,5 +1,3 @@
-USE project_scheduler;
-
 CREATE TABLE `project_scheduler`.`authenticated_user` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(48) NOT NULL,
@@ -10,8 +8,8 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
   `status` TINYINT(1) DEFAULT 1,
   `date_active` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_deactivated` DATETIME,
-  PRIMARY KEY (`user_name`),
-  INDEX ndx_user_contact (user_id, full_name, user_email),
+  PRIMARY KEY (`user_id`),
+  INDEX ndx_user_contact (`user_name`, `full_name`, `user_email`),
   CONSTRAINT unique_user_name_email UNIQUE(`user_name`,`user_email`)
  );
 
@@ -78,7 +76,6 @@ CREATE TABLE `project_scheduler`.`project_history`(
 
 CREATE TABLE `project_scheduler`.`projects` (
 	`project_id` INT NOT NULL AUTO_INCREMENT,
-	`parent_project_id` INT,
 	`project_name` VARCHAR(48) NOT NULL,
 	`date_created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`date_closed` DATETIME,
@@ -87,6 +84,18 @@ CREATE TABLE `project_scheduler`.`projects` (
 	INDEX ndx_projects (`project_name`),
 	CONSTRAINT unique_project UNIQUE(`project_name`)
 );
+
+drop table `project_scheduler`.`project_hierarchy`;
+
+CREATE TABLE `project_scheduler`.`sub_projects`(
+	`project_id` INT NOT NULL,
+	`sub_project_id` INT NOT NULL,
+	PRIMARY KEY(`project_id`, `sub_project_id`),
+	CONSTRAINT unique_project UNIQUE(`sub_project_id`),
+	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY(`sub_project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
 
 
 CREATE TABLE `project_scheduler`.`project_details` (
@@ -98,6 +107,7 @@ CREATE TABLE `project_scheduler`.`project_details` (
 );
 
 
+
 CREATE TABLE `project_scheduler`.`project_user` (
 	`project_id`  INT NOT NULL,
 	`user_id`  INT NOT NULL,
@@ -107,6 +117,8 @@ CREATE TABLE `project_scheduler`.`project_user` (
 	FOREIGN KEY(`user_id`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY(`role_id`) references `project_scheduler`.`role`(`role_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+
 
 DELIMITER $$
 CREATE TRIGGER trgr_projects_insert AFTER INSERT ON `project_scheduler`.`projects`
@@ -145,6 +157,7 @@ DELIMITER ;
 
 
 
+
 CREATE TABLE `project_scheduler`.`task_category` (
 	`category_id`  INT NOT NULL AUTO_INCREMENT,
 	`category_name` VARCHAR(32) NOT NULL,
@@ -154,6 +167,7 @@ CREATE TABLE `project_scheduler`.`task_category` (
 	INDEX ndx_task_category (`category_name`),
 	CONSTRAINT unique_task_category UNIQUE(`category_name`)
 );
+
 
 
 

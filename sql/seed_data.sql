@@ -3,8 +3,6 @@
 
 
 
-
-
 INSERT INTO `project_scheduler`.`permission`
 	(`permission_name`, `permission_type`)
 VALUES
@@ -70,11 +68,18 @@ VALUES
     
 ## Default project for testing administrator role
 
+
 INSERT INTO `project_scheduler`.`projects`
-	(`project_name`, `parent_project_id`)
+	(`project_name`)
 VALUES
-	('administrator Project', null),
-	('Sub Admin Project', 1);
+	('administrator Project'),
+	('Sub Admin Project');
+	
+	
+INSERT INTO `project_scheduler`.`sub_projects`
+	(`project_id`,`sub_project_id`)
+VALUES
+	(1,2);
 	
 	
 INSERT INTO `project_scheduler`.`project_details`
@@ -90,3 +95,30 @@ INSERT INTO `project_scheduler`.`project_user`
 VALUES
 	(1,1,2),
 	(2,1,2);
+	
+	
+## For testing user permissions
+
+
+SELECT 
+	p.permission_name 
+FROM 
+	`project_scheduler`.`authenticated_user` AS u 
+INNER JOIN 
+	`project_scheduler`.`user_role` AS ur 
+ON
+	(u.user_id=ur.user_id) 
+INNER JOIN 
+	`project_scheduler`.`role` AS r 
+ON
+	(ur.role_id=r.role_id) 
+INNER JOIN 
+	`project_scheduler`.`role_permission` AS rp 
+ON
+	(r.role_id=rp.role_id)
+INNER JOIN 
+	`project_scheduler`.`permission` AS p 
+ON
+	(rp.permission_id=p.permission_id) 
+WHERE 
+	u.user_name='administrator';

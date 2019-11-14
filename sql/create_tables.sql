@@ -17,6 +17,7 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
 
 
 
+
 CREATE TABLE `project_scheduler`.`role` (
 	`role_id` INT NOT NULL AUTO_INCREMENT,
   `role_name` VARCHAR(32) NOT NULL,

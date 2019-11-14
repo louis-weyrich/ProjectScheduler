@@ -1,4 +1,4 @@
-package com.sos.project.dto;
+package com.sos.project.dto.security;
 
 import com.sos.project.entity.enumeration.RoleType;
 import com.sos.project.entity.security.Permission;

@@ -1,4 +1,4 @@
-package com.sos.project.dto;
+package com.sos.project.dto.security;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import com.sos.project.dto.ProjectDTO;
 import com.sos.project.entity.Project;
 import com.sos.project.entity.security.AuthenticatedUser;
 import com.sos.project.entity.security.Permission;

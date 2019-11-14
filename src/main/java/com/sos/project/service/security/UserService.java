@@ -2,7 +2,7 @@ package com.sos.project.service.security;
 
 import java.util.List;
 
-import com.sos.project.dto.UserDTO;
+import com.sos.project.dto.security.UserDTO;
 import com.sos.project.entity.security.AuthenticatedUser;
 
 public interface UserService 

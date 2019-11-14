@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sos.project.dto.UserDTO;
+import com.sos.project.dto.security.UserDTO;
 import com.sos.project.entity.security.AuthenticatedUser;
 import com.sos.project.exception.UserException;
 import com.sos.project.service.security.impl.UserServiceImpl;

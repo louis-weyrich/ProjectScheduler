@@ -1,6 +1,6 @@
 package com.sos.project.exception;
  
-import com.sos.project.dto.UserDTO;
+import com.sos.project.dto.security.UserDTO;
 
 public class UserException extends RuntimeException {
 	

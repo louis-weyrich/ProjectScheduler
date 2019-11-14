@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sos.project.dto.UserDTO;
+import com.sos.project.dto.security.UserDTO;
 import com.sos.project.entity.security.AuthenticatedUser;
 import com.sos.project.exception.UserException;
 import com.sos.project.repository.security.UserRepository;

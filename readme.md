@@ -30,10 +30,10 @@
 
 ##Install Postman
 	- [Postman Client](https://www.getpostman.com/downloads)
-	
+
 ## J Micheal Brows Project
 	- [Simple Kanban] (https://github.com/jmichaelbrown8/simple-kanban)
-	
+
 ##Install Redis
 	- [Redis](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298)
 ##Install Balsamiq

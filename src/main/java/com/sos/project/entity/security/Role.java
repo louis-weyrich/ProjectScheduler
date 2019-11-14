@@ -1,5 +1,5 @@
 package com.sos.project.entity.security;
- 
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,26 +24,26 @@ import com.sos.project.entity.enumeration.RoleTypeConverter;
 
 @Table(name = "role", schema = "project_scheduler")
 @Entity(name="Role")
-public class Role 
+public class Role
 {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="role_id", nullable = false, updatable = false)
 	private Long roleId;
-	
+
 	@Column(name="role_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
 	private String roleName;
-	
+
 	@Convert(converter=RoleTypeConverter.class)
 	@Enumerated(EnumType.STRING)
 	@Column(name="role_type", length= 16, nullable = false, columnDefinition = "varchar(16)")
 	private RoleType roleType;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "role_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
-    private Set<Permission> permissions;
-	
+  @JoinTable(name = "role_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
+  private Set<Permission> permissions;
+
 	@ManyToMany(mappedBy = "roles")
 	private Set<AuthenticatedUser> users;
 
@@ -63,6 +63,14 @@ public class Role
 		this.roleName = roleName;
 	}
 
+	public RoleType getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(RoleType roleType) {
+		this.roleType = roleType;
+	}
+
 	public Set<Permission> getPermissions() {
 		return permissions;
 	}
@@ -80,6 +88,6 @@ public class Role
 	{
 		this.users = users;
 	}
-	
-	
+
+
 }

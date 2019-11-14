@@ -19,13 +19,13 @@ import com.sos.project.service.security.impl.UserServiceImpl;
 @RequestMapping("rest/public/password")
 public class PasswordController
 {
-	
+
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private UserServiceImpl userService;
-	
+
 
 	@GetMapping(value = "/encrypt/{mypassword}", produces = "application/json")
 	public String encryptPassword(@PathVariable("mypassword") String password)
@@ -34,13 +34,13 @@ public class PasswordController
 		return pword;
 	}
 
-	
+
 	@GetMapping(value = "/decrypt/{password}/{hash}", produces = "application/json")
 	public Boolean decryptPassword(@PathVariable("hash") String hash, @PathVariable("password") String password)
 	{
 		return bCryptPasswordEncoder.matches(password, hash);
 	}
-	
+
 	@GetMapping(value = "/login/{username}/{password}", produces = "application/json")
 	public UserDTO canLogin(@PathVariable("username") String username,  @PathVariable("password") String password)
 	{
@@ -56,7 +56,7 @@ public class PasswordController
 				throw new UserException("Password did not match for user "+username);
 			}
 		}
-		
+
 		throw new UserException("User "+username+" was not found");
 	}
 }

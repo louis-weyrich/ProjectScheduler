@@ -14,13 +14,13 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
   INDEX ndx_user_contact (user_id, full_name, user_email),
   CONSTRAINT unique_user_name_email UNIQUE(`user_name`,`user_email`)
  );
- 
- 
- 
+
+
+
 CREATE TABLE `project_scheduler`.`role` (
 	`role_id` INT NOT NULL AUTO_INCREMENT,
-    `role_name` VARCHAR(32) NOT NULL,
-    `role_type` VARCHAR(16) NOT NULL DEFAULT 'project', # values ('ADMIN','PROJECT')
+  `role_name` VARCHAR(32) NOT NULL,
+  `role_type` VARCHAR(16) NOT NULL DEFAULT 'project', # values ('ADMIN','PROJECT')
     PRIMARY KEY (`role_id`),
     CONSTRAINT unique_role UNIQUE(`role_name`)
 );
@@ -44,9 +44,9 @@ CREATE TABLE `project_scheduler`.`permission` (
     PRIMARY KEY (`permission_id`),
     CONSTRAINT unique_permission UNIQUE(`permission_name`)
 );
- 
- 
- 
+
+
+
 CREATE TABLE `project_scheduler`.`role_permission` (
 	`permission_id` INT NOT NULL,
     `role_id` INT NOT NULL,
@@ -111,7 +111,7 @@ DELIMITER $$
 CREATE TRIGGER trgr_projects_insert AFTER INSERT ON `project_scheduler`.`projects`
 	FOR EACH ROW
 	BEGIN
-		INSERT INTO `project_scheduler`.`project_history` 
+		INSERT INTO `project_scheduler`.`project_history`
 			(`history_type`,`project_id`,`table_id`, `table_name`, `column_name`, `altered_by`,`new_value`)
 		VALUES
 			('INSERT', NEW.project_id, NEW.project_id, 'projects', 'project_id', NEW.user_id, NEW.project_id);
@@ -124,21 +124,21 @@ DELIMITER $$
 CREATE TRIGGER trgr_projects_update BEFORE UPDATE ON `project_scheduler`.`projects`
 	FOR EACH ROW
 	BEGIN
-	
+
 		IF NEW.project_name <> OLD.project_name THEN
 			INSERT INTO `project_scheduler`.`project_history`
 				(`history_type`, `project_id`, `table_id`, `table_name`, `column_name`, `altered_by`, `old_value`, `new_value`)
 			VALUES
 				('UPDATE', OLD.project_id, OLD.project_id, 'projects', 'project_name', OLD.user_id, OLD.project_name, NEW.project_name);
 		END IF;
-		
+
 		IF NEW.status <> OLD.status THEN
 			INSERT INTO `project_scheduler`.`project_history`
 				(`history_type`, `project_id`, `table_id`, `table_name`, `column_name`, `altered_by`, `old_value`, `new_value`)
 			VALUES
 				('UPDATE', OLD.project_id, OLD.project_id, 'projects', 'status', OLD.user_id, OLD.status, NEW.status);
 		END IF;
-		
+
 	END;$$
 DELIMITER ;
 

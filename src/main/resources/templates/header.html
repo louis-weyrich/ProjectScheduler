@@ -1,69 +1,11 @@
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-  <body>
-      
-    <nav  th:fragment="menu" class="navbar navbar-expand-md" style="width:100%">
-    	<a class="navbar-brand" href="/">Home</span></a>
-    	
-    	<div class="dropdown show" sec:authorize="hasAuthority('USER')">
-    		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    			Users
-  			</a>
-    		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			    <a class="dropdown-item" href="/viewusers" sec:authorize="hasAuthority('USER')">View All</a>
-			    <a class="dropdown-item" href="/create-user" sec:authorize="hasAuthority('ADMIN')">Create New</a>
-			 </div>
-		</div>
-		
-		<div class="dropdown show">
-    		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="ticketsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    			Tickets
-  			</a>
-    		<div class="dropdown-menu" aria-labelledby="ticketsMenuLink">
-			    <a class="dropdown-item" href="/display-tickets">View All</a>
-			    <a class="dropdown-item" href="/search">Search</a>
-			    <a class="dropdown-item" href="/create-ticket" sec:authorize="hasAuthority('ADMIN')">Create New</a>
-			 </div>
-		</div>
-		
-		<div class="dropdown show">
-    		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="reportMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    			Reports
-  			</a>
-    		<div class="dropdown-menu" aria-labelledby="reportMenuLink">
-    			<a class="dropdown-item" href="/search-report">Advanced Ticket Search</a>
-			    <a class="dropdown-item" href="/monthly-report">This Month</a>
-			 </div>
-		</div>
-		<div class="show float-right" sec:authorize="isAuthenticated()">
-			<div>
-	    		<a class="btn btn-secondary" href="/logout" role="button" id="loginLink">
-	    			Logout
-	  			</a>
-			</div>
-		</div>
-		<div class="show float-right" sec:authorize="isAnonymous()">
-			<div>
-	    		<a class="btn btn-secondary" href="/login" role="button" id="loginLink">
-	    			Login
-	  			</a>
-			</div>
-		</div>
-		
-	</nav>
-  
-  </body>
-  
-</html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
   <body>
-      
+
     <nav  th:fragment="menu" class="navbar navbar-expand-md" style="width:100%">
     	<a class="navbar-brand" href="/">Home</span></a>
-    	
+
     	<div class="dropdown show" sec:authorize="hasAuthority('USER')">
     		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     			Users
@@ -73,7 +15,7 @@
 			    <a class="dropdown-item" href="/create-user" sec:authorize="hasAuthority('ADMIN')">Create New</a>
 			 </div>
 		</div>
-		
+
 		<div class="dropdown show">
     		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="ticketsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     			Tickets
@@ -84,7 +26,7 @@
 			    <a class="dropdown-item" href="/create-ticket" sec:authorize="hasAuthority('ADMIN')">Create New</a>
 			 </div>
 		</div>
-		
+
 		<div class="dropdown show">
     		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="reportMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     			Reports
@@ -108,9 +50,9 @@
 	  			</a>
 			</div>
 		</div>
-		
+
 	</nav>
-  
+
   </body>
-  
+
 </html>

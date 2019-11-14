@@ -18,10 +18,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 {
-	
+
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
     @Autowired
     private DataSource dataSource;
 
@@ -62,9 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutSuccessUrl("/home").and().exceptionHandling()
             .accessDeniedPage("/access-denied");
-		
+
 	}
-	
+
 	@Override
     protected void configure(AuthenticationManagerBuilder auth)
     throws Exception {

@@ -36,12 +36,12 @@ public class PasswordController
 
 	
 	@GetMapping(value = "/decrypt/{password}/{hash}", produces = "application/json")
-	public Boolean decryptPassword(@PathVariable("hash") String hash, @PathParam("password") String password)
+	public Boolean decryptPassword(@PathVariable("hash") String hash, @PathVariable("password") String password)
 	{
 		return bCryptPasswordEncoder.matches(password, hash);
 	}
 	
-	@GetMapping(value = "/can-login/{username}/{password}", produces = "application/json")
+	@GetMapping(value = "/login/{username}/{password}", produces = "application/json")
 	public UserDTO canLogin(@PathVariable("username") String username,  @PathVariable("password") String password)
 	{
 		AuthenticatedUser user = userService.getRawUserByUsername(username);

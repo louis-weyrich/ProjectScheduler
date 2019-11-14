@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,7 +29,7 @@ import com.sos.project.entity.security.AuthenticatedUser;
 
 
 @Table(name = "projects", schema = "project_scheduler")
-@Entity(name="Project")
+@Entity(name="Projects")
 public class Project 
 {
 	@Id
@@ -41,7 +40,8 @@ public class Project
 	@Column(name="project_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
 	private String projectName;
 	
-	@ManyToOne(targetEntity = Project.class, fetch = FetchType.LAZY)
+	@OneToOne(targetEntity = Project.class, fetch = FetchType.EAGER)
+	@JoinColumn(name="parent_project_id", referencedColumnName = "project_id", nullable = true)
 	private Project parentProject;
 
 	@Convert(converter=StatusConverter.class)
@@ -56,12 +56,12 @@ public class Project
 	private Date dateCreated;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "date_updated", nullable = true, columnDefinition = "TIMESTAMP")
+	@Column(name = "date_closed", nullable = true, columnDefinition = "TIMESTAMP")
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	private Date dateUpdated;
+	private Date dateClosed;
 	
 	@OneToOne(targetEntity = ProjectDetails.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "projectId", referencedColumnName = "projectId")
+	@JoinColumn(name = "project_id", referencedColumnName = "project_id")
 	private ProjectDetails details;
 	
 	@ManyToMany(cascade = CascadeType.ALL, targetEntity = AuthenticatedUser.class)
@@ -111,12 +111,12 @@ public class Project
 		this.dateCreated = dateCreated;
 	}
 
-	public Date getDateUpdated() {
-		return dateUpdated;
+	public Date getDateClosed() {
+		return dateClosed;
 	}
 
-	public void setDateUpdated(Date dateUpdated) {
-		this.dateUpdated = dateUpdated;
+	public void setDateClosed(Date dateClosed) {
+		this.dateClosed = dateClosed;
 	}
 
 	public ProjectDetails getDetails() {

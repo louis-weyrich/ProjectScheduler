@@ -2,7 +2,7 @@ package com.sos.project.entity.security;
 
 import java.util.Date;
 import java.util.Set;
- 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -23,6 +23,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.sos.project.dto.UserDTO;
+import com.sos.project.entity.Project;
 
 
 @Table(name = "authenticated_user", schema = "project_scheduler")
@@ -69,12 +70,18 @@ public class AuthenticatedUser
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
+	
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "project_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
+	private Set <Project> projects;
+	
 	
 	public AuthenticatedUser()
 	{
-		// empty constructor
+		// Do Nothing
 	}
+	
 	
 	public AuthenticatedUser(UserDTO user)
 	{
@@ -170,6 +177,18 @@ public class AuthenticatedUser
 		this.roles = roles;
 	}
 	
+	public Set<Project> getProjects()
+	{
+		return projects;
+	}
+
+
+	public void setProjects(Set<Project> projects)
+	{
+		this.projects = projects;
+	}
+
+
 	public int hashCode()
 	{
 		return username.hashCode();

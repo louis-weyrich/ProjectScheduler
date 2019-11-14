@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import com.sos.project.entity.Project;
 import com.sos.project.entity.security.AuthenticatedUser;
 import com.sos.project.entity.security.Permission;
 import com.sos.project.entity.security.Role;
@@ -42,6 +43,8 @@ public class UserDTO
 	
     private Set<PermissionDTO> permissions;
     
+    private Set<ProjectDTO> projects;
+    
     public UserDTO() {
     	
     }
@@ -60,7 +63,7 @@ public class UserDTO
     	
     	if(user.getRoles() != null)
     	{
-    		this.permissions = new HashSet<> ();
+    		this.permissions = new HashSet<PermissionDTO> ();
     		
     		for(Role role : user.getRoles())
     		{
@@ -71,6 +74,14 @@ public class UserDTO
     					permissions.add(new PermissionDTO(permission.getPermissionId(), permission.getPermissionName(), permission.getRoleType()));
     				}
     			}
+    		}
+    		
+    		this.projects = new HashSet<ProjectDTO> ();
+    		
+    		for(Project project : user.getProjects())
+    		{
+    			if(project != null)
+    				projects.add(new ProjectDTO(project));
     		}
     	}
     }
@@ -167,6 +178,16 @@ public class UserDTO
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<ProjectDTO> getProjects()
+	{
+		return projects;
+	}
+
+	public void setProjects(Set<ProjectDTO> projects)
+	{
+		this.projects = projects;
 	}
 
 }

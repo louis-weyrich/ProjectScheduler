@@ -78,7 +78,7 @@ CREATE TABLE `project_scheduler`.`project_history`(
 
 CREATE TABLE `project_scheduler`.`projects` (
 	`project_id` INT NOT NULL AUTO_INCREMENT,
-	`parent_project_id` INT NOT NULL,
+	`parent_project_id` INT,
 	`project_name` VARCHAR(48) NOT NULL,
 	`date_created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`date_closed` DATETIME,

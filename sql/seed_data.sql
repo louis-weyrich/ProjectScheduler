@@ -51,7 +51,7 @@ VALUES
 
 
 
-INSERT INTO authenticated_user 
+INSERT INTO `project_scheduler`.`authenticated_user`
 	(`user_name`, `password_hash`, `full_name`, `user_email`)
 values
 	('administrator','$2a$10$hA8ZxNDjCr3HPLdgk158CebHJS6GjNdPA8SHLCTnZ3d7Vu8bJmYJW','Project Administrator','project_admin@gmail.com');
@@ -66,3 +66,27 @@ VALUES
     (2,1),
     (3,1),
     (4,1);
+    
+    
+## Default project for testing administrator role
+
+INSERT INTO `project_scheduler`.`projects`
+	(`project_name`, `parent_project_id`)
+VALUES
+	('administrator Project', null),
+	('Sub Admin Project', 1);
+	
+	
+INSERT INTO `project_scheduler`.`project_details`
+	(`project_id`, `short_desc`, `long_desc`)
+VALUES
+	(1, 'Administrator Project Test','This project is created to test administrator project functions.'),
+    (2, 'Administrator Sub Project Test','This project is created to test administrator sub project functions.');
+	
+
+	
+INSERT INTO `project_scheduler`.`project_user`
+	(`project_id`, `user_id`, `role_id`)
+VALUES
+	(1,1,2),
+	(2,1,2);

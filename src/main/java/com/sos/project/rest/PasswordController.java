@@ -3,10 +3,13 @@ package com.sos.project.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sos.project.dto.security.LoginUserDTO;
 import com.sos.project.dto.security.UserDTO;
 import com.sos.project.entity.security.AuthenticatedUser;
 import com.sos.project.exception.UserException;
@@ -39,7 +42,7 @@ public class PasswordController
 		return bCryptPasswordEncoder.matches(password, hash);
 	}
 
-	@GetMapping(value = "/login/{username}/{password}", produces = "application/json")
+	@GetMapping(value = "/can-login/{username}/{password}", produces = "application/json")
 	public UserDTO canLogin(@PathVariable("username") String username,  @PathVariable("password") String password)
 	{
 		AuthenticatedUser user = userService.getRawUserByUsername(username);
@@ -56,5 +59,26 @@ public class PasswordController
 		}
 
 		throw new UserException("User "+username+" was not found");
+	}
+	
+	
+
+	@PostMapping(value = "/login", produces = "application/json")
+	public UserDTO login(@ModelAttribute("logInUser") LoginUserDTO loginUser)
+	{
+		AuthenticatedUser user = userService.getRawUserByUsername(loginUser.getUsername());
+		if(user != null)
+		{
+			if(bCryptPasswordEncoder.matches(loginUser.getPassword(), user.getPasswordHash()))
+			{
+				return new UserDTO(user);
+			}
+			else
+			{
+				throw new UserException("Password did not match for user "+loginUser.getUsername());
+			}
+		}
+
+		throw new UserException("User "+loginUser.getUsername()+" was not found");
 	}
 }

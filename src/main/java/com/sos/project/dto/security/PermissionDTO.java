@@ -9,11 +9,24 @@ public class PermissionDTO {
 	private String permissionName;
 	private RoleType roleType;
 	
+	
+	public PermissionDTO() 
+	{
+		/*Do Nothing*/
+	}
+	
 	public PermissionDTO(Long permissionId, String permissionName, RoleType roleType) {
 		super();
 		this.permissionId = permissionId;
 		this.permissionName = permissionName;
 		this.roleType = roleType;
+	}
+	
+	public PermissionDTO(Permission permission)
+	{
+		this.permissionId = permission.getPermissionId();
+		this.permissionName = permission.getPermissionName();
+		this.roleType = permission.getRoleType();
 	}
 
 	public Long getPermissionId() {

@@ -22,7 +22,7 @@ public class ProjectDTO
 	
 	public ProjectDTO()
 	{
-		// TODO Auto-generated constructor stub
+		// Do Nothing
 	}
 	
 	

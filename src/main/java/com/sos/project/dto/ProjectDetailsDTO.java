@@ -9,7 +9,6 @@ public class ProjectDetailsDTO
 	private Long projectId;
 	private String shortdescription;
 	private String longDescription;
-	private Project project;
 
 
 	public ProjectDetailsDTO()
@@ -61,18 +60,6 @@ public class ProjectDetailsDTO
 	public void setLongDescription(String longDescription)
 	{
 		this.longDescription = longDescription;
-	}
-
-
-	public Project getProject()
-	{
-		return project;
-	}
-
-
-	public void setProject(Project project)
-	{
-		this.project = project;
 	}
 
 }

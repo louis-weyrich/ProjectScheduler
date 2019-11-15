@@ -118,7 +118,7 @@ CREATE TABLE `project_scheduler`.`project_user` (
 );
 
 
-
+/*
 DELIMITER $$
 CREATE TRIGGER trgr_projects_insert AFTER INSERT ON `project_scheduler`.`projects`
 	FOR EACH ROW
@@ -153,7 +153,7 @@ CREATE TRIGGER trgr_projects_update BEFORE UPDATE ON `project_scheduler`.`projec
 
 	END;$$
 DELIMITER ;
-
+*/
 
 
 

@@ -73,3 +73,12 @@
 After GITHub Desktop is installed Add the following Remote Repository
     - [Project Scheduler](https://github.com/louis-weyrich/ProjectScheduler.git)
     - Pull the project down to your local repository
+
+---
+
+#Datebase SQL Files
+	- execute the following files in order
+	- 1 create_db_and_user.sql
+	- 2 create_tables.sql
+	- 3 seed_data.sql
+	

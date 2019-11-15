@@ -1,6 +1,5 @@
 package com.sos.project.dto;
 
-import com.sos.project.entity.Project;
 import com.sos.project.entity.ProjectDetails;
 
 public class ProjectDetailsDTO

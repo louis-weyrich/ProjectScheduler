@@ -3,11 +3,9 @@ package com.sos.project.dto;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import com.sos.project.entity.Project;
 import com.sos.project.entity.enumeration.Status;
-import com.sos.project.entity.security.AuthenticatedUser;
 
 public class ProjectDTO
 {

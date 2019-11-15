@@ -36,5 +36,9 @@
 
 ##Install Redis
 	- [Redis](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298)
+	
 ##Install Balsamiq
 	- [Balsalmiq](https://balsamiq.com/wireframes/desktop/)
+	
+##Install HTTP Debugger
+	-[ProxyMan](https://proxyman.io/)

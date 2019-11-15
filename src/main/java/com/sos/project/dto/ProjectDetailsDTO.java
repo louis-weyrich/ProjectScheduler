@@ -15,6 +15,7 @@ public class ProjectDetailsDTO
 	public ProjectDetailsDTO()
 	{
 		// TODO Auto-generated constructor stub
+		// Do nothing
 	}
 
 

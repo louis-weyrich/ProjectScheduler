@@ -65,9 +65,11 @@
 ##Install HTTP Proxy Monitor
     -[Charles Proxy](https://www.charlesproxy.com/)
 
+##Install Balsamiq
+    - [Balsalmiq](https://balsamiq.com/wireframes/desktop/)
+
 ---
 #Setting up GIT
 After GITHub Desktop is installed Add the following Remote Repository
     - [Project Scheduler](https://github.com/louis-weyrich/ProjectScheduler.git)
     - Pull the project down to your local repository
-

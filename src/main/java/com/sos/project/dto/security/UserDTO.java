@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sos.project.dto.ProjectDTO;
 import com.sos.project.entity.Project;
 import com.sos.project.entity.security.AuthenticatedUser;
@@ -26,6 +27,7 @@ public class UserDTO
 	@NotEmpty
 	private String fullName;
 	
+	@JsonIgnore
 	private String passwordHash;
 	
 	private String password;
@@ -55,7 +57,7 @@ public class UserDTO
     	this.userId = user.getUserId();
     	this.username = user.getUsername();
     	this.fullName = user.getFullName();
-//    	this.passwordHash = user.getPasswordHash();
+    	this.passwordHash = user.getPasswordHash();
     	this.email = user.getEmail();
     	this.phone = user.getPhone();
     	this.status = user.getStatus();

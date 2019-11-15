@@ -3,11 +3,9 @@ package com.sos.project.dto;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import com.sos.project.entity.Project;
 import com.sos.project.entity.enumeration.Status;
-import com.sos.project.entity.security.AuthenticatedUser;
 
 public class ProjectDTO
 {
@@ -19,7 +17,6 @@ public class ProjectDTO
 	private Date dateCreated;
 	private Date dateClosed;
 	private ProjectDetailsDTO details;
-	private Set<AuthenticatedUser> users;
 
 	
 	
@@ -131,20 +128,6 @@ public class ProjectDTO
 	public void setDetails(ProjectDetailsDTO details)
 	{
 		this.details = details;
-	}
-
-
-
-	public Set<AuthenticatedUser> getUsers()
-	{
-		return users;
-	}
-
-
-
-	public void setUsers(Set<AuthenticatedUser> users)
-	{
-		this.users = users;
 	}
 
 

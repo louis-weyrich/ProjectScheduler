@@ -81,3 +81,8 @@ After GITHub Desktop is installed Add the following Remote Repository
 	- 1 create_db_and_user.sql
 	- 2 create_tables.sql
 	- 3 seed_data.sql
+
+---
+
+##**Generate this file to a PDF document*
+    -[Markdown to PDF](https://www.markdowntopdf.com/)

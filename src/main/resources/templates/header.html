@@ -16,26 +16,7 @@
 			 </div>
 		</div>
 
-		<div class="dropdown show">
-    		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="ticketsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    			Tickets
-  			</a>
-    		<div class="dropdown-menu" aria-labelledby="ticketsMenuLink">
-			    <a class="dropdown-item" href="/display-tickets">View All</a>
-			    <a class="dropdown-item" href="/search-tickets">Search</a>
-			    <a class="dropdown-item" href="/create-ticket" sec:authorize="hasAuthority('ADMIN')">Create New</a>
-			 </div>
-		</div>
-
-		<div class="dropdown show">
-    		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="reportMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    			Reports
-  			</a>
-    		<div class="dropdown-menu" aria-labelledby="reportMenuLink">
-    			<a class="dropdown-item" href="/search-report">Advanced Ticket Search</a>
-			    <a class="dropdown-item" href="/monthly-report">This Month</a>
-			 </div>
-		</div>
+		
 		<div class="show float-right" sec:authorize="isAuthenticated()">
 			<div>
 	    		<a class="btn btn-secondary" href="/logout" role="button" id="loginLink">

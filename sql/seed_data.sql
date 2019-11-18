@@ -15,7 +15,12 @@ VALUES
     ('view_permission','ADMIN'),
     ('create_role','ADMIN'),
     ('view_role','ADMIN'),
-    ('user_login','ADMIN');
+    ('create_project','ADMIN'),
+    ('view_project','ADMIN'),
+    ('update_project','ADMIN'),
+    ('delete_project','ADMIN'),
+    ('create_sub_project','PROJECT'),
+    ('project_owner','PROJECT');
 
 
 
@@ -27,7 +32,9 @@ VALUES
     ('permission_admin','ADMIN'),
     ('role_admin','ADMIN'),
     ('general_user','ADMIN'),
-    ('advanced_user','ADMIN');
+    ('advanced_user','ADMIN'),
+    ('project_user','PROJECT'),
+    ('project_viewer','PROJECT');
 
 
 

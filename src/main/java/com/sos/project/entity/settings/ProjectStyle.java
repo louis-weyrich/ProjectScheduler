@@ -1,4 +1,4 @@
-package com.sos.project.entity;
+package com.sos.project.entity.settings;
 
 import java.util.Set;
 

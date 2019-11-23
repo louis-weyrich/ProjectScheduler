@@ -1,5 +1,7 @@
 package com.sos.project.entity;
 
+import com.sos.project.entity.settings.ProjectStyle;
+
 public class ProjectSettings {
 	
 	private Long projectId;

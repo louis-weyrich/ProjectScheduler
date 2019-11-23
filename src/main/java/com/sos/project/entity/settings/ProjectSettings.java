@@ -1,12 +1,10 @@
-package com.sos.project.entity;
-
-import com.sos.project.entity.settings.ProjectStyle;
+package com.sos.project.entity.settings;
 
 public class ProjectSettings {
 	
 	private Long projectId;
 	private String resourcesFolder;
-	private ProjectStyle style;
+	private Theme style;
 
 	public ProjectSettings() {
 		// TODO Auto-generated constructor stub
@@ -28,11 +26,11 @@ public class ProjectSettings {
 		this.resourcesFolder = resourcesFolder;
 	}
 
-	public ProjectStyle getStyle() {
+	public Theme getStyle() {
 		return style;
 	}
 
-	public void setStyle(ProjectStyle style) {
+	public void setStyle(Theme style) {
 		this.style = style;
 	}
 

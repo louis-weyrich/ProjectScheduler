@@ -4,7 +4,7 @@ public class StyleAttribute {
 	
 	private Long styleAttributeId;
 	private Long styleId;
-	private String styleName;
+	private StyleElement element;
 	private String styleValue;
 
 	public StyleAttribute() {
@@ -27,12 +27,12 @@ public class StyleAttribute {
 		this.styleId = styleId;
 	}
 
-	public String getStyleName() {
-		return styleName;
+	public StyleElement getElement() {
+		return element;
 	}
 
-	public void setStyleName(String styleName) {
-		this.styleName = styleName;
+	public void setElement(StyleElement element) {
+		this.element = element;
 	}
 
 	public String getStyleValue() {

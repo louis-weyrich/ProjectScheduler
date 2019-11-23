@@ -2,13 +2,13 @@ package com.sos.project.entity.settings;
 
 import java.util.Set;
 
-public class ProjectStyle {
+public class Theme {
 	
 	private Long settingId;
 	private String name;
 	private Set <Style> styles;
 
-	public ProjectStyle() {
+	public Theme() {
 		// TODO Auto-generated constructor stub
 	}
 

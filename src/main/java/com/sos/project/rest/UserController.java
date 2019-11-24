@@ -17,7 +17,7 @@ import com.sos.project.service.security.UserService;
 public class UserController {
 	
 	@Value("page.list.batchsize")
-	private Integer batchSize;
+	private String batchSize;
 	
 	@Autowired
 	private UserService userService;
@@ -30,7 +30,8 @@ public class UserController {
 	@GetMapping(path = "/list/active/{page}")
 	public List <UserDTO> getActiveUsersList(@PathVariable Integer page)
 	{
-		return userService.getActiveUsersList(batchSize, page);
+		int intBatchSize = Integer.valueOf(batchSize);
+		return userService.getActiveUsersList(intBatchSize, page);
 	}
 	
 

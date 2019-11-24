@@ -34,9 +34,11 @@ public class UserServiceImpl implements UserService
 	 * @param page
 	 * @return
 	 */
-	public List<UserDTO> getUsersList(int batchSize, int page)
+	public List<UserDTO> getActiveUsersList(int batchSize, int page)
 	{
 		Page <AuthenticatedUser> userList = userRepo.findAllActiveUsers(PageRequest.of(page, batchSize));
+		userList.stream().filter((user) -> user.getStatus() == true);
+		
 		List <UserDTO> dtoList = new ArrayList <UserDTO> (userList.getSize());
 		
 		for(AuthenticatedUser user : userList)
@@ -47,6 +49,26 @@ public class UserServiceImpl implements UserService
 		return dtoList;
 	}
 	
+	/**
+	 * 
+	 * @param batchSize
+	 * @param page
+	 * @return
+	 */
+	public List<UserDTO> getAllUsersList(int batchSize, int page)
+	{
+		Page <AuthenticatedUser> userList = userRepo.findAllActiveUsers(PageRequest.of(page, batchSize));
+		
+		List <UserDTO> dtoList = new ArrayList <UserDTO> (userList.getSize());
+		
+		for(AuthenticatedUser user : userList)
+		{
+			dtoList.add(new UserDTO(user));
+		}
+		
+		return dtoList;
+	}
+
 	/**
 	 * 
 	 * @param id

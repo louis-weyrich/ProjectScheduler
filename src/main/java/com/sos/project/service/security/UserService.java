@@ -7,7 +7,8 @@ import com.sos.project.entity.security.AuthenticatedUser;
 
 public interface UserService 
 {
-	public List<UserDTO> getUsersList(int batchSize, int page);
+	public List<UserDTO> getActiveUsersList(int batchSize, int page);
+	public List<UserDTO> getAllUsersList(int batchSize, int page);
 	public UserDTO getUserById(Long id);
 	public UserDTO getUserByUsername(String username);
 	public AuthenticatedUser getRawUserByUsername(String username);

@@ -36,7 +36,7 @@ public class Project
 	@Column(name="project_id", nullable = false, updatable = false)
 	private Long projectId;
 	
-	@Column(name="project_name", length = 48, nullable = false, unique = true, columnDefinition = "varchar(48)")
+	@Column(name="project_name", length = 48, nullable = false, updatable = false, unique = true, columnDefinition = "varchar(48)")
 	private String projectName;
 
 	@Convert(converter=StatusConverter.class)

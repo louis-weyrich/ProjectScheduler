@@ -100,7 +100,7 @@ VALUES
 	
 ## For testing user permissions
 
-
+/*
 SELECT 
 	p.permission_name 
 FROM 
@@ -123,3 +123,15 @@ ON
 	(rp.permission_id=p.permission_id) 
 WHERE 
 	u.user_name='administrator';
+*/
+	
+	
+INSERT INTO `project_scheduler`.`style_element`
+	(`name`,`descriptive_name`,`description`,`example`,`priority`,`status`)
+VALUES
+	('color','Text Color', 'change the color of child text.','{color: red} or {color: #00ff00} or {color: rgb(0,0,255)}', 1, 1),
+	('background-color','Background Color', 'Change the background color.','{color: red} or {color: #00ff00} or {color: rgb(0,0,255)}', 1, 1),
+	('background-image','Background Image', 'Change the background to an image.','background-image: url("paper.gif")', 1, 1),;
+	('background-repeat','Background Image Repeat', 'Change the way the image is repeated values(repeat-x, repeat-y, repeat, no-repeat)','background-repeat: repeat-y;', 1, 1),
+	('background-size','Background Image Size', 'Change the size of the background image values(auto, a number length, a percentage, cover, contain, initial, inherit)','background-size: auto;', 1, 1),
+	('border','Border Style', 'Change the border style.','{border: 5px solid red} or {border: 4px dotted blue} or {border: double}', 1, 1);

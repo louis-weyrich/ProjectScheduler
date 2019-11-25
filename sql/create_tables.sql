@@ -137,7 +137,8 @@ CREATE TABLE `project_scheduler`.`style_element`(
 	`style_element_id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(32) NOT NULL,
     `descriptive_name` VARCHAR(64) NOT NULL,
-    `description` VARCHAR(256) NOT NULL,
+    `example` VARCHAR(120),
+    `description` VARCHAR(512) NOT NULL,
     `priority` TINYINT(3) DEFAULT 1,
     `status` TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`style_element_id`)

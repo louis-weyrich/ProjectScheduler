@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -12,8 +14,9 @@ import javax.persistence.ManyToMany;
 public class Theme 
 {
 	@Id
-	@Column(name="setting_id", columnDefinition = "INT")
-	private Long settingId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="theme_id", nullable = false, updatable = false, columnDefinition = "INT")
+	private Long themeId;
 	
 	@Column(name="name", insertable = true, updatable = false, length = 26, columnDefinition = "VARCHAR(26)")
 	private String name;
@@ -27,12 +30,12 @@ public class Theme
 		// Do Nothing
 	}
 
-	public Long getSettingId() {
-		return settingId;
+	public Long getThemeId() {
+		return themeId;
 	}
 
-	public void setSettingId(Long settingId) {
-		this.settingId = settingId;
+	public void setThemeId(Long themeId) {
+		this.themeId = themeId;
 	}
 
 	public String getName() {

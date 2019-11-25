@@ -33,7 +33,7 @@ public class Project
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="project_id", nullable = false, updatable = false)
+	@Column(name="project_id", nullable = false, updatable = false, columnDefinition = "INT")
 	private Long projectId;
 	
 	@Column(name="project_name", length = 48, nullable = false, updatable = false, unique = true, columnDefinition = "varchar(48)")

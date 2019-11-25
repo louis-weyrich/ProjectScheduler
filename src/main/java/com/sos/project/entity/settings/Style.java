@@ -6,12 +6,23 @@ import com.sos.project.entity.enumeration.StyleType;
 
 public class Style {
 	
+	private Long styleId;
 	private StyleType type;
 	private String name;
 	private Set <StyleAttribute> styleAttributes;
 
 	public Style() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Long getStyleId()
+	{
+		return styleId;
+	}
+
+	public void setStyleId(Long styleId)
+	{
+		this.styleId = styleId;
 	}
 
 	public StyleType getType() {

@@ -5,15 +5,13 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
   `full_name` VARCHAR(26) NOT NULL,
   `user_email` VARCHAR(48) NOT NULL,
   `phone` VARCHAR(22),
-  `status` TINYINT(1) DEFAULT 1,
+  `status` TINYINT(1) NOT NULL DEFAULT 1,
   `date_active` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_deactivated` DATETIME,
   PRIMARY KEY (`user_id`),
   INDEX ndx_user_contact (`user_name`, `full_name`, `user_email`),
   CONSTRAINT unique_user_name_email UNIQUE(`user_name`,`user_email`)
  );
-
-
 
 
 CREATE TABLE `project_scheduler`.`role` (
@@ -25,7 +23,6 @@ CREATE TABLE `project_scheduler`.`role` (
 );
 
 
-
 CREATE TABLE `project_scheduler`.`user_role` (
 	`role_id` INT NOT NULL,
     `user_id` INT NOT NULL,
@@ -33,7 +30,6 @@ CREATE TABLE `project_scheduler`.`user_role` (
     FOREIGN KEY(`user_id`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY(`role_id`) references `project_scheduler`.`role`(`role_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
-
 
 
 CREATE TABLE `project_scheduler`.`permission` (
@@ -45,7 +41,6 @@ CREATE TABLE `project_scheduler`.`permission` (
 );
 
 
-
 CREATE TABLE `project_scheduler`.`role_permission` (
 	`permission_id` INT NOT NULL,
     `role_id` INT NOT NULL,
@@ -55,34 +50,17 @@ CREATE TABLE `project_scheduler`.`role_permission` (
 );
 
 
-
-CREATE TABLE `project_scheduler`.`project_history`(
-	`history_id` INT NOT NULL AUTO_INCREMENT,
-	`history_type` VARCHAR(6) NOT NULL, /* INSERT, UPDATE, DELETE */
-	`project_id` INT NOT NULL,
-	`table_id` INT NOT NULL,
-	`table_name` VARCHAR(32),
-	`column_name` VARCHAR(32),
-	`altered_by` INT NOT NULL,
-	`old_value` VARCHAR(256),
-	`new_value` VARCHAR(256),
-	`date_created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`history_id`),
-	FOREIGN KEY(`altered_by`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-	INDEX ndx_history (`history_type`,`column_name`,`altered_by`)
-);
-
-
-
 CREATE TABLE `project_scheduler`.`projects` (
 	`project_id` INT NOT NULL AUTO_INCREMENT,
 	`project_name` VARCHAR(48) NOT NULL,
+	`is_public` TINYINT(1) DEFAULT 1,
+    `theme_name` VARCHAR(32) NOT NULL,
+    `resource_folder` VARCHAR(256) NOT NULL,
 	`date_created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`date_closed` DATETIME,
 	`status` VARCHAR(12) NOT NULL DEFAULT 'OPEN',
 	PRIMARY KEY (`project_id`),
-	INDEX ndx_projects (`project_name`),
-	CONSTRAINT unique_project UNIQUE(`project_name`)
+	INDEX ndx_projects (`project_name`)
 );
 
 
@@ -96,7 +74,6 @@ CREATE TABLE `project_scheduler`.`sub_projects`(
 );
 
 
-
 CREATE TABLE `project_scheduler`.`project_details` (
     `project_id` INT NOT NULL,
 	`short_desc` VARCHAR(256),
@@ -106,14 +83,64 @@ CREATE TABLE `project_scheduler`.`project_details` (
 );
 
 
-
-CREATE TABLE `project_scheduler`.`project_user` (
+CREATE TABLE `project_scheduler`.`project_settings` (
 	`project_id`  INT NOT NULL,
-	`user_id`  INT NOT NULL,
-    `role_id` INT NOT NULL,
-	PRIMARY KEY (`project_id`, `user_id`,`role_id`),
+    `theme_id` INT NOT NULL,
+	PRIMARY KEY (`project_id`),
 	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-	FOREIGN KEY(`user_id`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY(`theme_id`) references `project_scheduler`.`theme`(`theme_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE `project_scheduler`.`project_theme` (
+	`theme_id` INT NOT NULL,
+    `project_id`  INT NOT NULL,
+    `theme_name` VARCHAR(32) NOT NULL,
+    `status` TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`theme_id`),
+	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    CONSTRAINT unique_theme UNIQUE(`theme_name`)
+);
+
+
+CREATE TABLE `project_scheduler`.`project_style` (
+	`style_id` INT NOT NULL,
+    `theme_id`  INT NOT NULL,
+    `style_name` VARCHAR(32) NOT NULL,
+    `style_type` VARCHAR(10) NOT NULL DEFAULT 'CLASS',
+    `status` TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`theme_id`),
+	FOREIGN KEY(`theme_id`) references `project_scheduler`.`project_theme`(`theme_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+CREATE TABLE `project_scheduler`.`style_element`(
+	`style_element_id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(32) NOT NULL,
+    `description` VARCHAR(256) NOT NULL,
+    `priority` TINYINT(3) DEFAULT 1,
+    `status` TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`style_name_id`)
+);
+
+
+CREATE TABLE `project_scheduler`.`style_attribute`(
+    `style_element_id` INT NOT NULL,
+    `style_id` INT NOT NULL,
+    `style_value` VARCHAR(32),
+    `status` TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`style_element_id`, `style_id`),
+    FOREIGN KEY(`style_element_id`) references `project_scheduler`.`style_element`(`style_element_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY(`style_id`) references `project_scheduler`.`project_style`(`style_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+CREATE TABLE `project_scheduler`.`project_user`(
+    `project_id` INT NOT NULL,
+    `user_id` INT NOT NULL,
+    `role_id` INT NOT NULL,
+    PRIMARY KEY (`project_id`,`user_id`,`role_id`),
+    FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY(`user_id`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY(`role_id`) references `project_scheduler`.`role`(`role_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
@@ -129,7 +156,6 @@ CREATE TRIGGER trgr_projects_insert AFTER INSERT ON `project_scheduler`.`project
 			('INSERT', NEW.project_id, NEW.project_id, 'projects', 'project_id', NEW.user_id, NEW.project_id);
 	END$$
 DELIMITER ;
-
 
 
 DELIMITER $$
@@ -156,7 +182,6 @@ DELIMITER ;
 */
 
 
-
 CREATE TABLE `project_scheduler`.`task_category` (
 	`category_id`  INT NOT NULL AUTO_INCREMENT,
 	`category_name` VARCHAR(32) NOT NULL,
@@ -166,8 +191,6 @@ CREATE TABLE `project_scheduler`.`task_category` (
 	INDEX ndx_task_category (`category_name`),
 	CONSTRAINT unique_task_category UNIQUE(`category_name`)
 );
-
-
 
 
 CREATE TABLE `project_scheduler`.`task`(
@@ -187,11 +210,27 @@ CREATE TABLE `project_scheduler`.`task`(
 );
 
 
-
 CREATE TABLE `project_scheduler`.`task_details`(
 	`task_id` INT NOT NULL,
 	`task_short_desc` VARCHAR(256),
 	`task_long_desc` TEXT,
 	PRIMARY KEY (`task_id`),
 	FOREIGN KEY(`task_id`) references `project_scheduler`.`task`(`task_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+CREATE TABLE `project_scheduler`.`project_history`(
+	`history_id` INT NOT NULL AUTO_INCREMENT,
+	`history_type` VARCHAR(6) NOT NULL, /* INSERT, UPDATE, DELETE */
+	`project_id` INT NOT NULL,
+	`table_id` INT NOT NULL,
+	`table_name` VARCHAR(32),
+	`column_name` VARCHAR(32),
+	`altered_by` INT NOT NULL,
+	`old_value` VARCHAR(256),
+	`new_value` VARCHAR(256),
+	`date_created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`history_id`),
+	FOREIGN KEY(`altered_by`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	INDEX ndx_history (`history_type`,`column_name`,`altered_by`)
 );

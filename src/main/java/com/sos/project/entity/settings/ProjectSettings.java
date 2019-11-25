@@ -3,6 +3,7 @@ package com.sos.project.entity.settings;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,11 +17,11 @@ public class ProjectSettings {
 	@Column(name="project_id", nullable = false, updatable = false)
 	private Long projectId;
 	
-	@Column(name="resource_folder", nullable = false, updatable = false)
+	@Column(name="resource_folder", nullable = false, updatable = false, length = 256, columnDefinition = "VARCHAR(256)")
 	private String resourcesFolder;
 	
 	@ManyToOne(targetEntity = Theme.class, optional = false,fetch = FetchType.EAGER)
-	@JoinColumn(name = "theme_id")
+	@JoinColumn(name = "theme_id",referencedColumnName = "theme_id")
 	private Theme theme;
 
 	

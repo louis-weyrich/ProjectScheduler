@@ -6,7 +6,7 @@
     <nav  th:fragment="menu" class="navbar navbar-expand-md" style="width:100%">
     	<a class="navbar-brand" href="/">Home</span></a>
 
-    	<div class="dropdown show" sec:authorize="hasAuthority('USER')">
+    	<div class="dropdown show" sec:authorize="hasAuthority('view_user')">
     		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     			Users
   			</a>

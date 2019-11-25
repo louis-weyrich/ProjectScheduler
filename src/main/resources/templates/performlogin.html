@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+	<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </head>
 
 	<body>
@@ -23,10 +23,10 @@
 		<main role="main" class="container" >
 			<br>
 			Logging you in!<br>
-			<img src="@{/images/spinner.gif}" height="30px" width="30px" />
+			<th:img src="@{/images/spinner.gif}" height="30px" width="30px" />
 		</main>
 		<!-- /.container -->
 	
-		<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+		
 	</body>
 </html>

@@ -36,6 +36,10 @@
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-core</artifactId>
 		</dependency -->
+		<!--  dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
@@ -70,6 +74,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter -->
 		<dependency>
 		    <groupId>com.github.ulisesbocchio</groupId>
@@ -83,10 +91,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<dependency>
+		<!-- dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-		</dependency>
+		</dependency -->
 		<dependency>
 		    <groupId>org.thymeleaf.extras</groupId>
 		    <artifactId>thymeleaf-extras-java8time</artifactId>
@@ -109,7 +117,6 @@
 		    <artifactId>bootstrap-datepicker</artifactId>
 		    <version>1.7.1</version>
 		</dependency>
-        
         <dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>jquery</artifactId>

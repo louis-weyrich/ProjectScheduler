@@ -1,64 +1,38 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Support Flow [Home Page]</title>
-	<style>
-    	fieldset { padding:10; border:1; margin-top:25px; background-color: white;}
-    	.containerTable{padding-left: 100px; padding-right: 30px;}
-    	.ui-dialog .ui-state-error { padding: .3em; }
-    	.validateTips { border: 1px solid transparent; padding: 0.3em; }		
-		.ui-draggable, .ui-droppable {
-			background-position: top;
-		}
-    </style>
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	    <th:title text="${appname}+'[Home Page]'"></th:title>
+		<style>
+	    	fieldset { padding:10; border:1; margin-top:25px; background-color: white;}
+	    	.containerTable{padding-left: 100px; padding-right: 30px;}
+	    	.ui-dialog .ui-state-error { padding: .3em; }
+	    	.validateTips { border: 1px solid transparent; padding: 0.3em; }		
+			.ui-draggable, .ui-droppable {
+				background-position: top;
+			}
+	    </style>
+	    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+	    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	  	<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+	</head>
 
 	<body>
 		<header class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-			<div class="white-text" th:text="${appname}+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'"></div>
 			<nav  class="navbar navbar-expand-md" th:include="header :: menu"></nav>
 		</header>
 
 		<main role="main" class="containerTable">
 			<br/><br/>
-		    <div>
-		    	<b>Monthly Status Report</b>&nbsp;&nbsp;&nbsp;
-		    	<span th:each="report : ${statusReport}">
-		    		<span th:style="*{report.status.style}" th:text="*{'[ '+report.count+' '+report.status+' ]'}"></span>&nbsp;&nbsp;
-		    	</span><br/>
-		    	<b>Monthly Severity Report</b>&nbsp;&nbsp;&nbsp;
-		    	<span th:each="report : ${severityReport}">
-		    		<span th:style="*{report.severity.style}" th:text="*{'[ '+report.count+' '+report.severity+' ]'}"></span>&nbsp;&nbsp;
-		    	</span><br/>
-		    	<b>Monthly Server Report</b>&nbsp;&nbsp;&nbsp;
-		    	<span th:each="report : ${serverReport}">
-		    		<span th:style="*{report.server.style}" th:text="*{'[ '+report.count+' '+report.server+' ]'}"></span>&nbsp;&nbsp;
-		    	</span><br/><br/>
-		    </div>
-			<div>
-			    <h2>What action would you like to take?</h2>
-			    <ul>
-			    	<li sec:authorize="isAuthenticated()"><a href="/viewusers" ><span>List Users</span></a></li>
-			    	<li sec:authorize="hasAuthority('ADMIN')"><a href="/create-user"><span>Create User</span></a></li>
-			    	<li><a href="/display-tickets"><span>Display Active Tickets</span></a></li>
-			    	<li sec:authorize="isAuthenticated()"><a href="/create-ticket"><span>Create New Ticket</span></a></li>
-			    	<li><a href="/search"><span>Search Tickets</span></a></li>
-			    </ul>
-			    <!-- ul th:each="action : ${actions}">
-			    	<li><a th:href="${action.value}"><span th:text="${action.key}"></span></a></li>
-			    </ul-->
-		    </div>
+		    
 		</main>
 		<!-- /.container -->
 	
-		<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+		
 	</body>
 </html>

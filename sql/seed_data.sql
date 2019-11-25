@@ -1,5 +1,4 @@
 #SET SQL_SAFE_UPDATES=0;
-#SET FOREIGN_KEY_CHECKS=0;
 
 
 INSERT INTO `project_scheduler`.`permission`
@@ -74,8 +73,8 @@ VALUES
 INSERT INTO `project_scheduler`.`projects`
 	(`project_name`, `theme_name`,`resource_folder`)
 VALUES
-	('administrator Project','defaulttheme','administrator_Project'),
-	('Sub Admin Project','defaulttheme','administrator_Project/Sub_Admin_Project');
+	('administrator Project','default_theme','administrator_Project'),
+	('Sub Admin Project','default_theme','administrator_Project/Sub_Admin_Project');
 	
 	
 INSERT INTO `project_scheduler`.`sub_projects`

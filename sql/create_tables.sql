@@ -1,4 +1,6 @@
-use `project_scheduler`;
+USE `project_scheduler`;
+
+SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS `project_scheduler`.`authenticated_user`;
 
@@ -99,6 +101,7 @@ CREATE TABLE `project_scheduler`.`project_theme` (
 	`theme_id` INT NOT NULL,
     `project_id`  INT NOT NULL,
     `theme_name` VARCHAR(32) NOT NULL,
+    `description` VARCHAR(256) DEFAULT '',
     `status` TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`theme_id`),
 	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -122,6 +125,7 @@ CREATE TABLE `project_scheduler`.`project_style` (
     `theme_id`  INT NOT NULL,
     `style_name` VARCHAR(32) NOT NULL,
     `style_type` VARCHAR(10) NOT NULL DEFAULT 'CLASS',
+    `description` VARCHAR(256) DEFAULT '',
     `status` TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`style_id`),
 	FOREIGN KEY(`theme_id`) references `project_scheduler`.`project_theme`(`theme_id`) ON UPDATE CASCADE ON DELETE RESTRICT
@@ -132,6 +136,7 @@ DROP TABLE IF EXISTS `project_scheduler`.`style_element`;
 CREATE TABLE `project_scheduler`.`style_element`(
 	`style_element_id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(32) NOT NULL,
+    `descriptive_name` VARCHAR(64) NOT NULL,
     `description` VARCHAR(256) NOT NULL,
     `priority` TINYINT(3) DEFAULT 1,
     `status` TINYINT(1) NOT NULL DEFAULT 1,
@@ -144,6 +149,7 @@ CREATE TABLE `project_scheduler`.`style_attribute`(
     `style_element_id` INT NOT NULL,
     `style_id` INT NOT NULL,
     `style_value` VARCHAR(32),
+    `description` VARCHAR(256) DEFAULT '',
     `status` TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`style_element_id`, `style_id`),
     FOREIGN KEY(`style_element_id`) references `project_scheduler`.`style_element`(`style_element_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -256,3 +262,5 @@ CREATE TABLE `project_scheduler`.`project_history`(
 	FOREIGN KEY(`altered_by`) references `project_scheduler`.`authenticated_user`(`user_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
 	INDEX ndx_history (`history_type`,`column_name`,`altered_by`)
 );
+
+SET FOREIGN_KEY_CHECKS=1;

@@ -1,3 +1,7 @@
+use `project_scheduler`;
+
+DROP TABLE IF EXISTS `project_scheduler`.`authenticated_user`;
+
 CREATE TABLE `project_scheduler`.`authenticated_user` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(48) NOT NULL,
@@ -13,6 +17,7 @@ CREATE TABLE `project_scheduler`.`authenticated_user` (
   CONSTRAINT unique_user_name_email UNIQUE(`user_name`,`user_email`)
  );
 
+DROP TABLE IF EXISTS `project_scheduler`.`role`;
 
 CREATE TABLE `project_scheduler`.`role` (
 	`role_id` INT NOT NULL AUTO_INCREMENT,
@@ -22,6 +27,7 @@ CREATE TABLE `project_scheduler`.`role` (
     CONSTRAINT unique_role UNIQUE(`role_name`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`user_role`;
 
 CREATE TABLE `project_scheduler`.`user_role` (
 	`role_id` INT NOT NULL,
@@ -31,6 +37,7 @@ CREATE TABLE `project_scheduler`.`user_role` (
     FOREIGN KEY(`role_id`) references `project_scheduler`.`role`(`role_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`permission`;
 
 CREATE TABLE `project_scheduler`.`permission` (
 	`permission_id` INT NOT NULL AUTO_INCREMENT,
@@ -40,6 +47,7 @@ CREATE TABLE `project_scheduler`.`permission` (
     CONSTRAINT unique_permission UNIQUE(`permission_name`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`role_permission`;
 
 CREATE TABLE `project_scheduler`.`role_permission` (
 	`permission_id` INT NOT NULL,
@@ -49,6 +57,7 @@ CREATE TABLE `project_scheduler`.`role_permission` (
     FOREIGN KEY(`role_id`) references `project_scheduler`.`permission`(`permission_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`projects`;
 
 CREATE TABLE `project_scheduler`.`projects` (
 	`project_id` INT NOT NULL AUTO_INCREMENT,
@@ -63,6 +72,7 @@ CREATE TABLE `project_scheduler`.`projects` (
 	INDEX ndx_projects (`project_name`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`sub_projects`;
 
 CREATE TABLE `project_scheduler`.`sub_projects`(
 	`project_id` INT NOT NULL,
@@ -73,6 +83,7 @@ CREATE TABLE `project_scheduler`.`sub_projects`(
 	FOREIGN KEY(`sub_project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`project_details`;
 
 CREATE TABLE `project_scheduler`.`project_details` (
     `project_id` INT NOT NULL,
@@ -82,14 +93,7 @@ CREATE TABLE `project_scheduler`.`project_details` (
 	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-
-CREATE TABLE `project_scheduler`.`project_settings` (
-	`project_id`  INT NOT NULL,
-    `theme_id` INT NOT NULL,
-	PRIMARY KEY (`project_id`),
-	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-	FOREIGN KEY(`theme_id`) references `project_scheduler`.`theme`(`theme_id`) ON UPDATE CASCADE ON DELETE RESTRICT
-);
+DROP TABLE IF EXISTS `project_scheduler`.`project_theme`;
 
 CREATE TABLE `project_scheduler`.`project_theme` (
 	`theme_id` INT NOT NULL,
@@ -98,20 +102,32 @@ CREATE TABLE `project_scheduler`.`project_theme` (
     `status` TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`theme_id`),
 	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT unique_theme UNIQUE(`theme_name`)
+    CONSTRAINT unique_theme UNIQUE(`theme_name`,`project_id`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`project_settings`;
+
+CREATE TABLE `project_scheduler`.`project_settings` (
+	`project_id`  INT NOT NULL,
+    `theme_id` INT NOT NULL,
+	PRIMARY KEY (`project_id`),
+	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY(`theme_id`) references `project_scheduler`.`project_theme`(`theme_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+DROP TABLE IF EXISTS `project_scheduler`.`project_style`;
 
 CREATE TABLE `project_scheduler`.`project_style` (
-	`style_id` INT NOT NULL,
+	`style_id` INT NOT NULL AUTO_INCREMENT,
     `theme_id`  INT NOT NULL,
     `style_name` VARCHAR(32) NOT NULL,
     `style_type` VARCHAR(10) NOT NULL DEFAULT 'CLASS',
     `status` TINYINT(1) NOT NULL DEFAULT 1,
-    PRIMARY KEY (`theme_id`),
+    PRIMARY KEY (`style_id`),
 	FOREIGN KEY(`theme_id`) references `project_scheduler`.`project_theme`(`theme_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`style_element`;
 
 CREATE TABLE `project_scheduler`.`style_element`(
 	`style_element_id` INT NOT NULL AUTO_INCREMENT,
@@ -119,9 +135,10 @@ CREATE TABLE `project_scheduler`.`style_element`(
     `description` VARCHAR(256) NOT NULL,
     `priority` TINYINT(3) DEFAULT 1,
     `status` TINYINT(1) NOT NULL DEFAULT 1,
-    PRIMARY KEY (`style_name_id`)
+    PRIMARY KEY (`style_element_id`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`style_attribute`;
 
 CREATE TABLE `project_scheduler`.`style_attribute`(
     `style_element_id` INT NOT NULL,
@@ -133,6 +150,7 @@ CREATE TABLE `project_scheduler`.`style_attribute`(
 	FOREIGN KEY(`style_id`) references `project_scheduler`.`project_style`(`style_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`project_user`;
 
 CREATE TABLE `project_scheduler`.`project_user`(
     `project_id` INT NOT NULL,
@@ -181,8 +199,9 @@ CREATE TRIGGER trgr_projects_update BEFORE UPDATE ON `project_scheduler`.`projec
 DELIMITER ;
 */
 
+DROP TABLE IF EXISTS `project_scheduler`.`task_category_lookup`;
 
-CREATE TABLE `project_scheduler`.`task_category` (
+CREATE TABLE `project_scheduler`.`task_category_lookup` (
 	`category_id`  INT NOT NULL AUTO_INCREMENT,
 	`category_name` VARCHAR(32) NOT NULL,
 	`category_description` TEXT,
@@ -192,6 +211,7 @@ CREATE TABLE `project_scheduler`.`task_category` (
 	CONSTRAINT unique_task_category UNIQUE(`category_name`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`task`;
 
 CREATE TABLE `project_scheduler`.`task`(
 	`task_id` INT NOT NULL AUTO_INCREMENT,
@@ -204,11 +224,12 @@ CREATE TABLE `project_scheduler`.`task`(
 	`actual_end_date` DATETIME NOT NULL,
 	`status` VARCHAR(12) NOT NULL DEFAULT 'CREATED',
 	PRIMARY KEY (`task_id`),
-	FOREIGN KEY(`category_id`) references `project_scheduler`.`task_category`(`category_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY(`category_id`) references `project_scheduler`.`task_category_lookup`(`category_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
 	INDEX ndx_tasks (`task_name`),
 	CONSTRAINT unique_task_name UNIQUE(`task_name`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`task_details`;
 
 CREATE TABLE `project_scheduler`.`task_details`(
 	`task_id` INT NOT NULL,
@@ -218,6 +239,7 @@ CREATE TABLE `project_scheduler`.`task_details`(
 	FOREIGN KEY(`task_id`) references `project_scheduler`.`task`(`task_id`) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`project_history`;
 
 CREATE TABLE `project_scheduler`.`project_history`(
 	`history_id` INT NOT NULL AUTO_INCREMENT,

@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 public class Theme 
 {
@@ -18,11 +18,15 @@ public class Theme
 	@Column(name="theme_id", nullable = false, updatable = false, columnDefinition = "INT")
 	private Long themeId;
 	
-	@Column(name="name", insertable = true, updatable = false, length = 26, columnDefinition = "VARCHAR(26)")
+	
+	@Column(name="project_id", nullable = false, updatable = false, columnDefinition = "INT")
+	private Long projectId;
+	
+	@Column(name="theme_name", insertable = true, updatable = true, length = 32, columnDefinition = "VARCHAR(32)")
 	private String name;
 	
-	@ManyToMany(targetEntity = Style.class, fetch = FetchType.EAGER)
-	@JoinTable(name = "theme_style", joinColumns = @JoinColumn(name = "style_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
+	@OneToMany(targetEntity = Style.class, fetch = FetchType.EAGER)
+	//@JoinTable(name = "theme_style", joinColumns = @JoinColumn(name = "style_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
 	private Set <Style> styles;
 
 	public Theme() 
@@ -36,6 +40,16 @@ public class Theme
 
 	public void setThemeId(Long themeId) {
 		this.themeId = themeId;
+	}
+
+	public Long getProjectId()
+	{
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId)
+	{
+		this.projectId = projectId;
 	}
 
 	public String getName() {

@@ -2,7 +2,6 @@
 #SET FOREIGN_KEY_CHECKS=0;
 
 
-
 INSERT INTO `project_scheduler`.`permission`
 	(`permission_name`, `permission_type`)
 VALUES
@@ -37,8 +36,6 @@ VALUES
     ('project_viewer','PROJECT');
 
 
-
-
 INSERT INTO `project_scheduler`.`role_permission`
 	(`permission_id`, `role_id`)
 VALUES
@@ -52,8 +49,6 @@ VALUES
     (8,4),
     (9,4),
     (10,5);
-
-
 
 
 INSERT INTO `project_scheduler`.`authenticated_user`
@@ -77,10 +72,10 @@ VALUES
 
 
 INSERT INTO `project_scheduler`.`projects`
-	(`project_name`)
+	(`project_name`, `theme_name`,`resource_folder`)
 VALUES
-	('administrator Project'),
-	('Sub Admin Project');
+	('administrator Project','defaulttheme','administrator_Project'),
+	('Sub Admin Project','defaulttheme','administrator_Project/Sub_Admin_Project');
 	
 	
 INSERT INTO `project_scheduler`.`sub_projects`

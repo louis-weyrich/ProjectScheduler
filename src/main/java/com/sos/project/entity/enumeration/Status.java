@@ -12,7 +12,8 @@ public enum Status
 	IN_PROGRESS("IN PROGRESS","color: DARKGREEN; font-weight:bold;"), 
 	BLOCKED("BLOCKED","color: white; background-color: DarkViolet; font-weight:bold;"), 
 	ON_HOLD("ON HOLD","color: white; background-color: DarkSlateBlue; font-weight:bold;"), 
-	CLOSED("CLOSED","color: white; background-color: BLACK; font-weight:bold;");
+	CLOSED("CLOSED","color: white; background-color: BLACK; font-weight:bold;"),
+	HIDDEN("HIDDEN","color: lightgrey; background-color: white; font-weight:bold;");
 	
 	private String style;
 	private String statusName;

@@ -4,22 +4,29 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.sos.project.entity.enumeration.StyleType;
 import com.sos.project.entity.enumeration.StyleTypeConverter;
 
+@Table(name="theme_style")
+@Entity(name="Style")
 public class Style {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="style_id", nullable = false, updatable = false, columnDefinition = "INT")
 	private Long styleId;
+	
+	@Column(name="theme_id", insertable = true, updatable = false, columnDefinition = "INT")
+	private Long themeId;
 	
 	@Convert(converter=StyleTypeConverter.class)
 	@Enumerated(EnumType.STRING)
@@ -32,9 +39,7 @@ public class Style {
 	@OneToMany(targetEntity = StyleAttribute.class)
 	private Set <StyleAttribute> styleAttributes;
 
-	public Style() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	public Long getStyleId()
 	{

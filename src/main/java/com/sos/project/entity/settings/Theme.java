@@ -3,6 +3,7 @@ package com.sos.project.entity.settings;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Table(name="project_theme")
+@Entity(name="Theme")
 public class Theme 
 {
 	@Id
@@ -25,15 +29,12 @@ public class Theme
 	@Column(name="theme_name", insertable = true, updatable = true, length = 32, columnDefinition = "VARCHAR(32)")
 	private String name;
 	
-	@OneToMany(targetEntity = Style.class, fetch = FetchType.EAGER)
-	//@JoinTable(name = "theme_style", joinColumns = @JoinColumn(name = "style_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
+	@OneToMany(targetEntity = Style.class, fetch = FetchType.EAGER, mappedBy = "themeId")
+//	@JoinTable(name = "theme_style", joinColumns = @JoinColumn(name = "style_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
 	private Set <Style> styles;
 
-	public Theme() 
-	{
-		// Do Nothing
-	}
 
+	
 	public Long getThemeId() {
 		return themeId;
 	}

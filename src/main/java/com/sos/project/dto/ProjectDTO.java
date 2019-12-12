@@ -14,6 +14,7 @@ public class ProjectDTO
 	private String projectName;
 	private List<ProjectDTO> subProject;
 	private Status 	status = Status.OPEN;
+	private String resourceFolder;
 	private Date dateCreated;
 	private Date dateClosed;
 	private ProjectDetailsDTO details;
@@ -35,6 +36,7 @@ public class ProjectDTO
     		this.dateCreated = project.getDateCreated();
     		this.dateClosed = project.getDateClosed();
     		this.status = project.getStatus();
+    		this.resourceFolder = project.getResourceFolder();
     		this.details = new ProjectDetailsDTO((project.getDetails() != null)?project.getDetails() : null);
     		
     		this.subProject = new ArrayList<ProjectDTO> (project.getSubProjects().size());
@@ -88,6 +90,16 @@ public class ProjectDTO
 		this.status = status;
 	}
 
+
+
+	public String getResourceFolder() {
+		return resourceFolder;
+	}
+
+
+	public void setResourceFolder(String resourceFolder) {
+		this.resourceFolder = resourceFolder;
+	}
 
 
 	public Date getDateCreated()

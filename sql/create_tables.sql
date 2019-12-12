@@ -108,6 +108,16 @@ CREATE TABLE `project_scheduler`.`project_theme` (
     CONSTRAINT unique_theme UNIQUE(`theme_name`,`project_id`)
 );
 
+DROP TABLE IF EXISTS `project_scheduler`.`project_themes`;
+
+CREATE TABLE `project_scheduler`.`project_themes` (
+	`project_id`  INT NOT NULL,
+    `theme_id` INT NOT NULL,
+	PRIMARY KEY (`project_id`),
+	FOREIGN KEY(`project_id`) references `project_scheduler`.`projects`(`project_id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY(`theme_id`) references `project_scheduler`.`project_theme`(`theme_id`) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
 DROP TABLE IF EXISTS `project_scheduler`.`project_settings`;
 
 CREATE TABLE `project_scheduler`.`project_settings` (
@@ -120,7 +130,7 @@ CREATE TABLE `project_scheduler`.`project_settings` (
 
 DROP TABLE IF EXISTS `project_scheduler`.`project_style`;
 
-CREATE TABLE `project_scheduler`.`project_style` (
+CREATE TABLE `project_scheduler`.`theme_style` (
 	`style_id` INT NOT NULL AUTO_INCREMENT,
     `theme_id`  INT NOT NULL,
     `style_name` VARCHAR(32) NOT NULL,
@@ -147,7 +157,7 @@ CREATE TABLE `project_scheduler`.`style_element`(
 DROP TABLE IF EXISTS `project_scheduler`.`style_attribute`;
 
 CREATE TABLE `project_scheduler`.`style_attribute`(
-    `style_element_id` INT NOT NULL,
+    `style_attribute_id` INT NOT NULL,
     `style_id` INT NOT NULL,
     `style_value` VARCHAR(32),
     `description` VARCHAR(256) DEFAULT '',

@@ -44,6 +44,9 @@ public class Project
 	@Column(name = "status", nullable = false)
 	private Status 	status = Status.OPEN;
 	
+	@Column(name = "resource_folder", nullable = false, insertable = true, length = 256, columnDefinition = "VARCHAR(256)")
+	private String resourceFolder;
+	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_created", nullable = true, columnDefinition = "TIMESTAMP")
@@ -86,6 +89,14 @@ public class Project
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public String getResourceFolder() {
+		return resourceFolder;
+	}
+
+	public void setResourceFolder(String resourceFolder) {
+		this.resourceFolder = resourceFolder;
 	}
 
 	public Date getDateCreated() {
